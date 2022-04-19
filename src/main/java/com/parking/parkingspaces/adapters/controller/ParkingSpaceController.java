@@ -22,6 +22,7 @@ import static com.parking.parkingspaces.config.utility.Constants.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/v1/parking/space")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class ParkingSpaceController {
     private final ModelMapper                           modelMapper;
     private final CreateParkingSpaceCommandService      createParkingSpaceCommandService;
