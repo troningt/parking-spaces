@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: parking-spaces-parking
+  config:
+    import: optional:configserver:http://localhost:8887/
+  security:
+    user:
+      name: test
+      password: 123
