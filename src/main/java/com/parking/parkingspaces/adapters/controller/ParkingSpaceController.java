@@ -3,6 +3,8 @@ package com.parking.parkingspaces.adapters.controller;
 import com.parking.parkingspaces.adapters.controller.dto.ParkingSpaceBusyDTO;
 import com.parking.parkingspaces.adapters.controller.dto.ParkingSpaceDTO;
 import com.parking.parkingspaces.application.port.in.parkingspace.*;
+import com.parking.parkingspaces.application.port.in.parkingspacebusy.LiberateParkingSpaceCommandService;
+import com.parking.parkingspaces.application.port.in.parkingspacebusy.UseParkingSpaceCommandService;
 import com.parking.parkingspaces.domain.ParkingSpace;
 import com.parking.parkingspaces.domain.ParkingSpaceBusy;
 import lombok.AllArgsConstructor;
@@ -27,8 +29,8 @@ public class ParkingSpaceController {
     private final GetParkingSpacesQueryService          getParkingSpacesQueryService;
     private final GetParkingSpacesFreeQueryService      getParkingSpacesFreeQueryService;
     private final DeleteParkingSpaceCommandService      deleteParkingSpaceCommandService;
-    private final UseParkingSpaceCommandService         useParkingSpaceCommandService;
-    private final LiberateParkingSpaceCommandService    liberateParkingSpaceCommandService;
+    private final UseParkingSpaceCommandService useParkingSpaceCommandService;
+    private final LiberateParkingSpaceCommandService liberateParkingSpaceCommandService;
 
     @PostMapping
     public ResponseEntity<String> createParkingSpace (@RequestBody ParkingSpaceDTO parkingSpaceDTO) {

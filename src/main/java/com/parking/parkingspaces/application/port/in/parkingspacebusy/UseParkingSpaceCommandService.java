@@ -1,4 +1,4 @@
-package com.parking.parkingspaces.application.port.in.parkingspace;
+package com.parking.parkingspaces.application.port.in.parkingspacebusy;
 
 import com.parking.parkingspaces.domain.ParkingSpaceBusy;
 

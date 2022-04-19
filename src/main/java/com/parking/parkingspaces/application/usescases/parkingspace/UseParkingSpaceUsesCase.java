@@ -1,6 +1,6 @@
 package com.parking.parkingspaces.application.usescases.parkingspace;
 
-import com.parking.parkingspaces.application.port.in.parkingspace.UseParkingSpaceCommandService;
+import com.parking.parkingspaces.application.port.in.parkingspacebusy.UseParkingSpaceCommandService;
 import com.parking.parkingspaces.application.port.out.ParkingSpaceBusyOut;
 import com.parking.parkingspaces.domain.ParkingSpaceBusy;
 import lombok.AllArgsConstructor;
