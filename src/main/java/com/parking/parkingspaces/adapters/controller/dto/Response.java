@@ -1,11 +1,13 @@
 package com.parking.parkingspaces.adapters.controller.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Data
+@Builder
 public class Response {
     private static final long UID = 1L;
     private String message;

@@ -1,6 +1,7 @@
 package com.parking.parkingspaces.adapters.controller;
 
 import com.parking.parkingspaces.adapters.controller.dto.ParkingDTO;
+import com.parking.parkingspaces.adapters.controller.dto.Response;
 import com.parking.parkingspaces.application.port.in.parking.CreateParkingCommandService;
 import com.parking.parkingspaces.application.port.in.parking.DeleteParkingCommandService;
 import com.parking.parkingspaces.application.port.in.parking.GetParkingQueryService;
@@ -25,9 +26,9 @@ public class ParkingController {
     private final DeleteParkingCommandService   deleteParkingCommandService;
 
     @PostMapping
-    public ResponseEntity<String> createParking(@RequestBody ParkingDTO parkingDTO) {
+    public ResponseEntity<Response> createParking(@RequestBody ParkingDTO parkingDTO) {
         createParkingCommandService.execute(modelMapper.map(parkingDTO, Parking.class));
-        return new ResponseEntity<>(MSG_CREATE_PARKING_OK, HttpStatus.OK);
+        return new ResponseEntity<>(Response.builder().message(MSG_CREATE_PARKING_OK).build(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -36,14 +37,14 @@ public class ParkingController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateParking(@PathVariable int id, @RequestBody ParkingDTO parkingDTO) {
+    public ResponseEntity<Response> updateParking(@PathVariable int id, @RequestBody ParkingDTO parkingDTO) {
         updateParkingCommandService.execute(id, modelMapper.map(parkingDTO, Parking.class));
-        return new ResponseEntity<>(MSG_UPDATE_PARKING_OK, HttpStatus.OK);
+        return new ResponseEntity<>(Response.builder().message(MSG_UPDATE_PARKING_OK).build(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteParking(@PathVariable int id) {
+    public ResponseEntity<Response> deleteParking(@PathVariable int id) {
         deleteParkingCommandService.execute(id);
-        return new ResponseEntity<>(MSG_DELETE_PARKING_OK, HttpStatus.OK);
+        return new ResponseEntity<>(Response.builder().message(MSG_DELETE_PARKING_OK).build(), HttpStatus.OK);
     }
 }

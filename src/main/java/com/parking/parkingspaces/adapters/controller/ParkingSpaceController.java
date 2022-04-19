@@ -2,6 +2,7 @@ package com.parking.parkingspaces.adapters.controller;
 
 import com.parking.parkingspaces.adapters.controller.dto.ParkingSpaceBusyDTO;
 import com.parking.parkingspaces.adapters.controller.dto.ParkingSpaceDTO;
+import com.parking.parkingspaces.adapters.controller.dto.Response;
 import com.parking.parkingspaces.application.port.in.parkingspace.*;
 import com.parking.parkingspaces.application.port.in.parkingspacebusy.LiberateParkingSpaceCommandService;
 import com.parking.parkingspaces.application.port.in.parkingspacebusy.UseParkingSpaceCommandService;
@@ -29,13 +30,13 @@ public class ParkingSpaceController {
     private final GetParkingSpacesQueryService          getParkingSpacesQueryService;
     private final GetParkingSpacesFreeQueryService      getParkingSpacesFreeQueryService;
     private final DeleteParkingSpaceCommandService      deleteParkingSpaceCommandService;
-    private final UseParkingSpaceCommandService useParkingSpaceCommandService;
-    private final LiberateParkingSpaceCommandService liberateParkingSpaceCommandService;
+    private final UseParkingSpaceCommandService         useParkingSpaceCommandService;
+    private final LiberateParkingSpaceCommandService    liberateParkingSpaceCommandService;
 
     @PostMapping
-    public ResponseEntity<String> createParkingSpace (@RequestBody ParkingSpaceDTO parkingSpaceDTO) {
+    public ResponseEntity<Response> createParkingSpace (@RequestBody ParkingSpaceDTO parkingSpaceDTO) {
         createParkingSpaceCommandService.execute(modelMapper.map(parkingSpaceDTO, ParkingSpace.class));
-        return new ResponseEntity<>(MSG_CREATE_OK, HttpStatus.OK);
+        return new ResponseEntity<>(Response.builder().message(MSG_CREATE_OK).build(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -58,26 +59,26 @@ public class ParkingSpaceController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateParkingSpace(@PathVariable int id, @RequestBody ParkingSpaceDTO parkingSpaceDTO) {
+    public ResponseEntity<Response> updateParkingSpace(@PathVariable int id, @RequestBody ParkingSpaceDTO parkingSpaceDTO) {
         updateParkingSpaceCommandService.execute(id, modelMapper.map(parkingSpaceDTO, ParkingSpace.class));
-        return new ResponseEntity<>(MSG_UPDATE_OK, HttpStatus.OK);
+        return new ResponseEntity<>(Response.builder().message(MSG_UPDATE_OK).build(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteParkingSpace(@PathVariable int id) {
+    public ResponseEntity<Response> deleteParkingSpace(@PathVariable int id) {
         deleteParkingSpaceCommandService.execute(id);
-        return new ResponseEntity<>(MSG_DELETE_OK, HttpStatus.OK);
+        return new ResponseEntity<>(Response.builder().message(MSG_DELETE_OK).build(), HttpStatus.OK);
     }
 
     @PutMapping("/use")
-    public ResponseEntity<String> useParkingSpace(@RequestBody ParkingSpaceBusyDTO parkingSpaceBusyDTO) {
+    public ResponseEntity<Response> useParkingSpace(@RequestBody ParkingSpaceBusyDTO parkingSpaceBusyDTO) {
         useParkingSpaceCommandService.execute(modelMapper.map(parkingSpaceBusyDTO, ParkingSpaceBusy.class));
-        return new ResponseEntity<>(MSG_USE_PARKING_SPACE, HttpStatus.OK);
+        return new ResponseEntity<>(Response.builder().message(MSG_USE_PARKING_SPACE).build(), HttpStatus.OK);
     }
 
     @PutMapping("/liberate")
-    public ResponseEntity<String> liberateParkingSpace(@RequestBody String id) {
+    public ResponseEntity<Response> liberateParkingSpace(@RequestBody String id) {
         liberateParkingSpaceCommandService.execute(id);
-        return new ResponseEntity<>(MSG_LIBERATE_PARKING_SPACE, HttpStatus.OK);
+        return new ResponseEntity<>(Response.builder().message(MSG_LIBERATE_PARKING_SPACE).build(), HttpStatus.OK);
     }
 }
