@@ -10,9 +10,6 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-
 @Repository
 @AllArgsConstructor
 public class ParkingSpaceBusyAdapter implements ParkingSpaceBusyOut {
@@ -24,10 +21,8 @@ public class ParkingSpaceBusyAdapter implements ParkingSpaceBusyOut {
     @Override
     public void useParkingSpace(ParkingSpaceBusy parkingSpace) {
         ParkingSpace space = getParkingSpaceQueryService.execute(parkingSpace.getParkingSpace());
-        space.setBusy(true);
         updateParkingSpaceCommandService.execute(space.getId(), space);
-        parkingSpace.setDateStart(Timestamp.from(Instant.now()).getTime());
-        parkingSpaceBusyPersistence.save(modelMapper.map(parkingSpace, ParkingSpaceBusyItem.class));
+        parkingSpaceBusyPersistence.save(modelMapper.map(space, ParkingSpaceBusyItem.class));
     }
 
     @Override

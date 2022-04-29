@@ -1,19 +1,18 @@
 package com.parking.parkingspaces.domain;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Value;
 
-@Data
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Value
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class ParkingSpaceBusy {
-    private String id;
+    String id;
 
-    private int parkingSpace;
-    private Long dateStart;
-    private Long dateEnd;
-    private String licensePlate;
+    int parkingSpace;
+    Long dateStart;
+    Long dateEnd;
+    String licensePlate;
 }

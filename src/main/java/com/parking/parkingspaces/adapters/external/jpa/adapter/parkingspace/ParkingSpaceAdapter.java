@@ -32,7 +32,7 @@ public class ParkingSpaceAdapter implements ParkingSpaceOut {
     @Override
     public List<ParkingSpace> findAll() {
         return parkingSpaceRepository.findAll().stream().map(parkingSpaceEntity ->
-                modelMapper.map(parkingSpaceEntity, ParkingSpace.class))
+                modelMapper.map(parkingSpaceEntity, ParkingSpace.ParkingSpaceBuilder.class).build())
                 .collect(Collectors.toList());
     }
 
@@ -40,13 +40,13 @@ public class ParkingSpaceAdapter implements ParkingSpaceOut {
     public List<ParkingSpace> findAllFree() {
         return parkingSpaceRepository.findAll().stream()
                 .filter(parkingSpaceEntity -> !parkingSpaceEntity.isBusy())
-                .map(parkingSpaceEntity -> modelMapper.map(parkingSpaceEntity, ParkingSpace.class))
+                .map(parkingSpaceEntity -> modelMapper.map(parkingSpaceEntity, ParkingSpace.ParkingSpaceBuilder.class).build())
                 .collect(Collectors.toList());
     }
 
     @Override
     public ParkingSpace find(int id) {
-        return modelMapper.map(parkingSpaceRepository.findById(id).orElseThrow(() -> new DataNotFoundException(DATA_NOT_FOUND_EXCEPTION)), ParkingSpace.class);
+        return modelMapper.map(parkingSpaceRepository.findById(id).orElseThrow(() -> new DataNotFoundException(DATA_NOT_FOUND_EXCEPTION)), ParkingSpace.ParkingSpaceBuilder.class).build();
     }
 
     @Override

@@ -33,26 +33,25 @@ dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 
 	// Postgres
-	implementation 'org.postgresql:postgresql:42.3.3'
+	implementation 'org.postgresql:postgresql:42.3.4'
 
 	// Mongodb
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
-
 	// Validation Starter
-	implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.6'
+	implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.7'
 	implementation 'org.hibernate.validator:hibernate-validator:7.0.4.Final'
 
 	// Swagger
-	implementation 'io.springfox:springfox-swagger2:3.0.0'
-	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
 	// ModelMapper
 	implementation 'org.modelmapper:modelmapper:3.1.0'
+	implementation 'io.github.yoshikawaa.modelmapper.spring.boot:modelmapper-spring-boot-starter:0.1.0'
 
 	// Lombok
-	compileOnly 'org.projectlombok:lombok:1.18.22'
-	annotationProcessor 'org.projectlombok:lombok:1.18.22'
+	compileOnly 'org.projectlombok:lombok:1.18.24'
+	annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
 	// Log4j
 	implementation 'org.apache.logging.log4j:log4j-api:2.17.2'

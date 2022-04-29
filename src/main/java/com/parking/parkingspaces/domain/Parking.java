@@ -1,21 +1,17 @@
 package com.parking.parkingspaces.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigInteger;
 
-@Data
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Value
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class Parking {
-    private int id;
-    private String name;
-    private String address;
-    private String schedules;
-    private BigInteger hourlyPrice;
-    private String currency;
+    int id;
+    String name;
+    String address;
+    String schedules;
+    BigInteger hourlyPrice;
+    String currency;
 }

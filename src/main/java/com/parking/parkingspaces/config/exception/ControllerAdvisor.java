@@ -47,6 +47,15 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(ParkingCreationLimitException.class)
+    public ResponseEntity<Response> handleParkingCreationLimitException(
+            ParkingCreationLimitException ex, WebRequest request) {
+
+        Response response = new Response(ex.getMessage());
+
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers,

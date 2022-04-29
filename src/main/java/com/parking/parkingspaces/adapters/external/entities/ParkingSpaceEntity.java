@@ -4,11 +4,13 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
 @Table(name = "parking_spaces")
-@Builder(toBuilder = true)
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -19,7 +21,11 @@ public class ParkingSpaceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @NotBlank(message = "Name is mandatory")
     private String name;
+
+    @NotNull(message = "State is mandatory")
     private boolean isBusy;
 
     @Override

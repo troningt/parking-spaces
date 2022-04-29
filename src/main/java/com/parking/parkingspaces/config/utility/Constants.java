@@ -12,6 +12,7 @@ public class Constants {
     public static final String MSG_CREATE_PARKING_OK = String.format(MSG_CRUD_PARKING, "created");
     public static final String MSG_DELETE_PARKING_OK = String.format(MSG_CRUD_PARKING, "deleted");
     public static final String MSG_UPDATE_PARKING_OK =String.format(MSG_CRUD_PARKING, "updated");
+    public static final String MSG_CREATION_LIMIT_PARKING = "Only one parking can be created";
 
     public static final String MSG_PARKING_SPACE_ALREADY_USE = "This parking space is already in use";
 

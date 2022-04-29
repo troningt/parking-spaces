@@ -2,18 +2,18 @@ package com.parking.parkingspaces.adapters.external.jpa.adapter.parking;
 
 import com.parking.parkingspaces.adapters.external.entities.ParkingEntity;
 import com.parking.parkingspaces.application.port.out.ParkingOut;
-import com.parking.parkingspaces.config.exception.DataNotFoundException;
+import com.parking.parkingspaces.config.exception.ParkingCreationLimitException;
 import com.parking.parkingspaces.config.exception.ParkingCustomErrorException;
 import com.parking.parkingspaces.config.exception.ParkingSpaceCustomErrorException;
 import com.parking.parkingspaces.config.exception.ParkingSpaceNotFoundException;
+import com.parking.parkingspaces.config.utility.Constants;
 import com.parking.parkingspaces.domain.Parking;
 import lombok.AllArgsConstructor;
 import org.hibernate.JDBCException;
-import org.hibernate.LazyInitializationException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
 
-import static com.parking.parkingspaces.config.utility.Constants.DATA_NOT_FOUND_EXCEPTION;
+import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
@@ -23,12 +23,15 @@ public class ParkingAdapter implements ParkingOut {
 
     @Override
     public void create(Parking parking) {
+        if (!parkingRepository.findAll().isEmpty()) {
+            throw new ParkingCreationLimitException(Constants.MSG_CREATION_LIMIT_PARKING);
+        }
         parkingRepository.save(modelMapper.map(parking, ParkingEntity.class));
     }
 
     @Override
-    public Parking find(int id) {
-        return modelMapper.map(parkingRepository.findById(id).orElseThrow(() -> new DataNotFoundException(DATA_NOT_FOUND_EXCEPTION)), Parking.class);
+    public Optional<Parking> find(int id) {
+        return parkingRepository.findById(id).map(parkingEntity -> modelMapper.map(parkingEntity, Parking.ParkingBuilder.class).build());
     }
 
     @Override
@@ -45,7 +48,7 @@ public class ParkingAdapter implements ParkingOut {
             parkingFromDb.setSchedules(parking.getSchedules());
             parkingFromDb.setCurrency(parking.getCurrency());
             parkingRepository.save(parkingFromDb);
-        } catch (LazyInitializationException e) {
+        } catch (Exception e) {
             throw new ParkingCustomErrorException(e.getMessage());
         }
     }
