@@ -2,10 +2,7 @@ package com.parking.parkingspaces.adapters.controller;
 
 import com.parking.parkingspaces.adapters.controller.dto.ParkingDTO;
 import com.parking.parkingspaces.adapters.controller.dto.Response;
-import com.parking.parkingspaces.application.port.in.parking.CreateParkingCommand;
-import com.parking.parkingspaces.application.port.in.parking.DeleteParkingCommandService;
-import com.parking.parkingspaces.application.port.in.parking.GetParkingQueryService;
-import com.parking.parkingspaces.application.port.in.parking.UpdateParkingCommandService;
+import com.parking.parkingspaces.application.port.in.parking.*;
 import com.parking.parkingspaces.config.utility.Constants;
 import com.parking.parkingspaces.domain.Parking;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -27,6 +26,7 @@ public class ParkingController {
     private final CreateParkingCommand          createParkingCommand;
     private final UpdateParkingCommandService   updateParkingCommandService;
     private final GetParkingQueryService        getParkingQueryService;
+    private final GetParkingsQueryService       getParkingsQueryService;
     private final DeleteParkingCommandService   deleteParkingCommandService;
 
     @Operation(
@@ -37,6 +37,7 @@ public class ParkingController {
                     @ApiResponse(responseCode = "400", description = "The body is malformed")
             }
     )
+    @PostMapping
     public ResponseEntity<Response> createParking(@Valid @RequestBody ParkingDTO parkingDTO) {
         createParkingCommand.execute(modelMapper.map(parkingDTO, Parking.ParkingBuilder.class).build());
         return new ResponseEntity<>(Response.builder().message(Constants.MSG_CREATE_PARKING_OK).build(), HttpStatus.CREATED);
@@ -53,6 +54,13 @@ public class ParkingController {
     @GetMapping("/{id}")
     public ResponseEntity<ParkingDTO> getParking(@Valid @PathVariable int id) {
         return new ResponseEntity<>(modelMapper.map(getParkingQueryService.execute(id), ParkingDTO.class), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ParkingDTO>> getParkingList() {
+        return new ResponseEntity<>(getParkingsQueryService.execute().stream()
+                .map(parking -> modelMapper.map(parking, ParkingDTO.class))
+                        .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @Operation(

@@ -1,6 +1,9 @@
 package com.parking.parkingspaces.domain;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Value;
 
 import java.math.BigInteger;
 

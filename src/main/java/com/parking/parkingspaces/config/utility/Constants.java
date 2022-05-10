@@ -2,9 +2,9 @@ package com.parking.parkingspaces.config.utility;
 
 public class Constants {
     public static final String MSG_CRUD_PARKING_SPACE = "Parking space %s successfully";
-    public static final String MSG_CREATE_OK = String.format(MSG_CRUD_PARKING_SPACE, "created");
-    public static final String MSG_DELETE_OK = String.format(MSG_CRUD_PARKING_SPACE, "deleted");
-    public static final String MSG_UPDATE_OK =String.format(MSG_CRUD_PARKING_SPACE, "updated");
+    public static final String MSG_CREATE_PARKING_SPACE_OK = String.format(MSG_CRUD_PARKING_SPACE, "created");
+    public static final String MSG_DELETE_PARKING_SPACE_OK = String.format(MSG_CRUD_PARKING_SPACE, "deleted");
+    public static final String MSG_UPDATE_PARKING_SPACE_OK =String.format(MSG_CRUD_PARKING_SPACE, "updated");
     public static final String MSG_USE_PARKING_SPACE = "Use of parking space started";
     public static final String MSG_LIBERATE_PARKING_SPACE = "Parking space liberated successfully";
 
@@ -13,10 +13,13 @@ public class Constants {
     public static final String MSG_DELETE_PARKING_OK = String.format(MSG_CRUD_PARKING, "deleted");
     public static final String MSG_UPDATE_PARKING_OK =String.format(MSG_CRUD_PARKING, "updated");
     public static final String MSG_CREATION_LIMIT_PARKING = "Only one parking can be created";
+    public static final String PARKING_NOT_FOUND = "Parking space with Id %d not found";
 
     public static final String MSG_PARKING_SPACE_ALREADY_USE = "This parking space is already in use";
 
     public static final String DATA_NOT_FOUND_EXCEPTION = "Data required not found";
+    public static final String FIELDS_REQUIRED = "One or more fields are required";
+    public static final String INTERNAL_SERVER_ERROR = "Something went wrong on the server";
 
     private Constants() {
         throw new IllegalStateException("Utility class never is called");

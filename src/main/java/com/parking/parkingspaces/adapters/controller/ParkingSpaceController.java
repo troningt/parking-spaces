@@ -47,7 +47,7 @@ public class ParkingSpaceController {
     @PostMapping
     public ResponseEntity<Response> createParkingSpace(@Valid @RequestBody ParkingSpaceDTO parkingSpaceDTO) {
         createParkingSpaceCommand.execute(modelMapper.map(parkingSpaceDTO, ParkingSpace.ParkingSpaceBuilder.class).build());
-        return new ResponseEntity<>(Response.builder().message(MSG_CREATE_OK).build(), HttpStatus.CREATED);
+        return new ResponseEntity<>(Response.builder().message(MSG_CREATE_PARKING_SPACE_OK).build(), HttpStatus.CREATED);
     }
 
     @Operation(
@@ -100,7 +100,7 @@ public class ParkingSpaceController {
     @PutMapping("/{id}")
     public ResponseEntity<Response> updateParkingSpace(@Valid @PathVariable int id, @Valid @RequestBody ParkingSpaceDTO parkingSpaceDTO) {
         updateParkingSpaceCommandService.execute(id, modelMapper.map(parkingSpaceDTO, ParkingSpace.ParkingSpaceBuilder.class).build());
-        return new ResponseEntity<>(Response.builder().message(MSG_UPDATE_OK).build(), HttpStatus.OK);
+        return new ResponseEntity<>(Response.builder().message(MSG_UPDATE_PARKING_SPACE_OK).build(), HttpStatus.OK);
     }
 
     @Operation(
@@ -114,7 +114,7 @@ public class ParkingSpaceController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteParkingSpace(@Valid @PathVariable int id) {
         deleteParkingSpaceCommandService.execute(id);
-        return new ResponseEntity<>(Response.builder().message(MSG_DELETE_OK).build(), HttpStatus.OK);
+        return new ResponseEntity<>(Response.builder().message(MSG_DELETE_PARKING_SPACE_OK).build(), HttpStatus.OK);
     }
 
     @Operation(

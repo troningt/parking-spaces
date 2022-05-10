@@ -13,7 +13,9 @@ import org.hibernate.JDBCException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
@@ -32,6 +34,13 @@ public class ParkingAdapter implements ParkingOut {
     @Override
     public Optional<Parking> find(int id) {
         return parkingRepository.findById(id).map(parkingEntity -> modelMapper.map(parkingEntity, Parking.ParkingBuilder.class).build());
+    }
+
+    @Override
+    public List<Parking> findAll() {
+        return parkingRepository.findAll().stream()
+                .map(parkingEntity -> modelMapper.map(parkingEntity, Parking.ParkingBuilder.class).build())
+                .collect(Collectors.toList());
     }
 
     @Override
